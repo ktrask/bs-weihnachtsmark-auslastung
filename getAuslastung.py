@@ -19,7 +19,8 @@ for ort in orte:
     myres = requests.get(url)
     timestamp = re.sub(r".*last update: (....-..-.. ..:..:..) - .*",r"\1",str(myres.content))
     timestamps.append(timestamp)
-    auslastung = re.sub(r".*Auslastung: ([\.0-9]+).nbsp.%.*",r"\1",str(myres.content))
+    auslastung = re.sub(r".*Auslastung: ([\.,0-9]+).nbsp.%.*",r"\1",str(myres.content))
+    re.sub(",",".",auslastung)
     auslastungen.append(auslastung)
 result = f"{timestamps[0]},{auslastungen[0]}," +\
     f"{timestamps[1]},{auslastungen[1]}," +\
