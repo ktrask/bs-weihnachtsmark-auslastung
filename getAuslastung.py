@@ -1,5 +1,6 @@
 import requests
 import re
+import logging as log
 
 orte = {
     'burgplatz': {'data-component-id': 'braunschweig-app-1'},
@@ -23,7 +24,8 @@ for ort in orte:
     re.sub(",",".",auslastung)
     try:
         float(auslastung)
-    except:
+    except Exception as e:
+        log.warning(e)
         auslastung = ""
         # if the auslastung cannot be converted to a number, it is most likely an error like the string 'HTTP Exception' which means the values is not available
     auslastungen.append(auslastung)
