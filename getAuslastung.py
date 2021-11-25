@@ -21,6 +21,11 @@ for ort in orte:
     timestamps.append(timestamp)
     auslastung = re.sub(r".*Auslastung: ([\.,0-9]+).nbsp.%.*",r"\1",str(myres.content))
     re.sub(",",".",auslastung)
+    try:
+        float(auslastung)
+    except:
+        auslastung = ""
+        # if the auslastung cannot be converted to a number, it is most likely an error like the string 'HTTP Exception' which means the values is not available
     auslastungen.append(auslastung)
 result = f"{timestamps[0]},{auslastungen[0]}," +\
     f"{timestamps[1]},{auslastungen[1]}," +\
