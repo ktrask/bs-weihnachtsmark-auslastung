@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  weihnachtsmarkt:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ../:/data:ro
+    ports:
+      - "127.0.0.1:3838:3838"
