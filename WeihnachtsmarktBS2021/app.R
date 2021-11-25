@@ -13,7 +13,7 @@ library(shiny)
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel("Braunschweiger Weihnachtsmarktauslastung"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
@@ -48,7 +48,12 @@ server <- function(input, output) {
         library(ggplot2)
         library(anytime)
         library(ggthemes)
-        csv <- read.csv("~/progs/weihnachtsmark2021/auslastung.csv")
+        localFile <- "~/progs/weihnachtsmark2021/auslastung.csv"
+        if(file.exists(localFile)){
+          csv <- read.csv(localFile)
+        } else {
+          csv <- read.csv("/data/auslastung.csv")    
+        }
         
         auslastung <- data.frame(
             Zeit = anytime(c(
